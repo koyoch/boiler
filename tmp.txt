@@ -1,0 +1,24 @@
+sudo apt update
+sudo apt upgrade
+sudo apt-get install gnupg
+sudo wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add - 
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list 
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo service mongod start
+sudo service mongod status
+
+sudo vi /etc/mongod.conf
+    1. bindIp: 127.0.0.1, 123.123.123.123
+    2. bindIp: 0.0.0.0
+    바인드 아이디에 위와같이 특정 아이피만 접근 가능하게 하거나 0으로해서 모든 아이피에서 접근되도록 한다.
+sudo service mongod restart
+
+use admin 
+db.createUser({ user: "<fsys>", pwd: "<fsys1234!>", roles: [ "root" ] })
+mongod --auth --port 27017 --dbpath /data/db1 
+
+
+
+
+
